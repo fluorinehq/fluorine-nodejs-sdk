@@ -12,4 +12,5 @@ export default {
     { file: pkg.module, sourcemap: true, format: 'es' },
   ],
   plugins: [commonjs(), nodeResolve(), typescript()],
+  external: [...Object.keys(pkg.dependencies || {})],
 }

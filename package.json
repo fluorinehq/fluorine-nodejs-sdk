@@ -17,8 +17,12 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rollup -c"
+    "build": "pnpm clean && rollup -c",
+    "clean": "rm -rf dist/*"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
