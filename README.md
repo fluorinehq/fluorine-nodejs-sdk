@@ -1,1 +1,1 @@
-# fluorine-nodejs-sdk
+# @fluorine/nodejs-sdk
