@@ -22,9 +22,9 @@ type FluorineContext = {
 type FluorineResponse = { status: 'ok' } | { status: 'error'; message: string }
 
 const defaultBaseUrl = 'http://app.fluorinehq.com/api/client'
-const initEndpoint = '/init'
-const authorizeEndpoint = '/authorize'
-const recordEndpoint = '/record'
+const initEndpoint = 'init'
+const authorizeEndpoint = 'authorize'
+const recordEndpoint = 'record'
 
 const isInitialized: (ctx: FluorineContext) => RequestHandler =
   (ctx) => (req, res, next) => {
@@ -79,7 +79,9 @@ const recordEvent: (ctx: FluorineContext) => (meta?: any) => RequestHandler =
       })
       .catch((error) => {
         if (error instanceof HTTPError) {
-          return next(new Error(`Failed to authorize: ${error.response?.body}`))
+          console.warn(`Failed to record event: ${error.response?.body}`)
+        } else {
+          console.error(`Error during record event: ${error}`)
         }
       })
     next()
@@ -154,9 +156,6 @@ export const getFluorine = (config: ClientConfiguration): FluorineClient => {
     })
     .catch((error) => {
       if (error instanceof HTTPError) {
-        // if (initResponse.status === 'error') {
-        //   throw new Error(`Failed to initialize Fluorine: ${initResponse.message}`)
-        // }
         throw new Error(
           `Failed to initialize Fluorine: ${error.response?.body}`,
         )
