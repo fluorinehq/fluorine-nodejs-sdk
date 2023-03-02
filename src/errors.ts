@@ -1,6 +1,6 @@
 import { customErrorFactory } from 'ts-custom-error'
 
-const source = '@fluorine/nodejs-sdk'
+const source = '@fluorinehq/nodejs-sdk'
 
 export const BearerTokenError = customErrorFactory(function BearerTokenError(
   message,
