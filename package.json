@@ -12,8 +12,14 @@
   "bugs": {
     "url": "https://github.com/fluorinehq/nodejs-sdk/issues"
   },
-  "homepage": "https://www.fluorinehq.com/",
+  "homepage": "https://www.fluorinehq.com",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
