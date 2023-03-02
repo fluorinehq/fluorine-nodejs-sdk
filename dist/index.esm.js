@@ -54,7 +54,7 @@ function __generator(thisArg, body) {
     }
 }
 
-var source = '@fluorine/nodejs-sdk';
+var source = '@fluorinehq/nodejs-sdk';
 var BearerTokenError = customErrorFactory(function BearerTokenError(message) {
     this.source = source;
     this.message = message;
@@ -79,9 +79,9 @@ var getBearerToken = function (req) {
 };
 
 var defaultBaseUrl = 'http://app.fluorinehq.com/api/client';
-var initEndpoint = '/init';
-var authorizeEndpoint = '/authorize';
-var recordEndpoint = '/record';
+var initEndpoint = 'init';
+var authorizeEndpoint = 'authorize';
+var recordEndpoint = 'record';
 var isInitialized = function (ctx) { return function (req, res, next) {
     if (ctx.isInitialized) {
         next();
@@ -143,7 +143,10 @@ var recordEvent = function (ctx) { return function (meta) { return function (req
         .catch(function (error) {
         var _a;
         if (error instanceof HTTPError) {
-            return next(new Error("Failed to authorize: ".concat((_a = error.response) === null || _a === void 0 ? void 0 : _a.body)));
+            console.warn("Failed to record event: ".concat((_a = error.response) === null || _a === void 0 ? void 0 : _a.body));
+        }
+        else {
+            console.error("Error during record event: ".concat(error));
         }
     });
     next();
@@ -184,9 +187,6 @@ var getFluorine = function (config) {
         .catch(function (error) {
         var _a;
         if (error instanceof HTTPError) {
-            // if (initResponse.status === 'error') {
-            //   throw new Error(`Failed to initialize Fluorine: ${initResponse.message}`)
-            // }
             throw new Error("Failed to initialize Fluorine: ".concat((_a = error.response) === null || _a === void 0 ? void 0 : _a.body));
         }
         throw new Error("Failed to initialize Fluorine: ".concat(error.message));
